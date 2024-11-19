@@ -1,5 +1,5 @@
-import { ModelResponse } from './modelClientTypes';
+import { ResponseData } from './modelClientTypes';
 
 export interface StoryResponse {
-  data: ModelResponse;
+  data: ResponseData;
 }

@@ -1,13 +1,17 @@
 import axios from 'axios';
-import { Message, ModelResponse } from 'src/types/modelClientTypes';
+import {
+  Message,
+  ModelResponse,
+  ResponseData,
+} from 'src/types/modelClientTypes';
 
 export class ModelClient {
   private readonly instance = axios.create({
-    baseURL: process.env.modelUrl,
+    baseURL: process.env.MODEL_URL,
     timeout: 10000,
   });
 
-  async completion(messages: Message[]): Promise<ModelResponse> {
+  async completion(messages: Message[]): Promise<ResponseData> {
     try {
       const response: ModelResponse = await this.instance.post(
         '/v1/chat/completions',
@@ -21,8 +25,8 @@ export class ModelClient {
           do_sample: true,
         },
       );
-
-      return response;
+      console.log('it: ', response.data);
+      return response.data;
     } catch (error) {
       throw Error('Error in calling LLM Model. Message: ' + error);
     }

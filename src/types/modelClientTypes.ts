@@ -1,4 +1,8 @@
 export interface ModelResponse {
+  data: ResponseData;
+}
+
+export interface ResponseData {
   object: string;
   id: string;
   created: Date;

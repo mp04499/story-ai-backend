@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import type { Message, ModelResponse } from '../types/modelClientTypes';
+import type { Message, ResponseData } from '../types/modelClientTypes';
 import { ModelClient } from 'src/clients/modelClient';
 
 @Injectable()
@@ -19,7 +19,7 @@ export class StoryService {
     return this._text;
   }
 
-  async callModel(): Promise<ModelResponse> {
+  async callModel(): Promise<ResponseData> {
     const messages = this.formatText();
     const res = await this.client.completion(messages);
     return res;
