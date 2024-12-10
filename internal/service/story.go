@@ -2,7 +2,6 @@ package service
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/mp04499/story-ai-backend/internal/client"
 	"github.com/mp04499/story-ai-backend/internal/model"
 	"net/http"
@@ -22,8 +21,8 @@ func GetStory(rw http.ResponseWriter, req *http.Request) {
 
 	llmRequest := createLlmRequest(request.Text)
 	llmResponse := client.CallStoryLlm(llmRequest)
-
-	_, err = rw.Write([]byte(fmt.Sprint(llmResponse)))
+	encoder := json.NewEncoder(rw)
+	err = encoder.Encode(llmResponse)
 	if err != nil {
 		panic(err)
 	}
